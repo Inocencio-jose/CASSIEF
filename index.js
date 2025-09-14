@@ -108,6 +108,7 @@ bot.onText(/\/ajuda/, (msg) => {
     `/postar – Enviar uma mensagem no grupo (somente administradores)\n` +
     `/advertir – Dar advertência a um usuário (somente administradores)\n` +
     `/suporte – Abrir um ticket de suporte\n` +
+    `/contatos – Contacte-nos\n` +
     `/fecharticket – Fechar um ticket (somente administradores)\n` +
     `/status – Verificar status dos servidores\n` +
     `/pontos – Verificar seus pontos\n` +
