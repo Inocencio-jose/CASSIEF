@@ -5,6 +5,7 @@ const fs = require('fs');
 const token = process.env.BOT_TOKEN;
 
 const bot = new TelegramBot(token, { polling: true });
+console.log('Servidor do bot está rodando!');
 
 // ID do chat do grupo
 const grupoDestino = -1002561684897;
@@ -73,6 +74,25 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
   bot.sendMessage(chatId, `👋 Olá, ${nome}!\n\nSou o CASSIEF, o assistente oficial da VPN AJ Freenet.\nEstou aqui para ajudar com informações, suporte e manter nosso grupo seguro.`);
+});
+
+bot.onText(/\/contatos/, (msg) => {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(chatId,
+    `📞 *Contatos da AJ Freenet*\n\n` +
+    `Entre em contato conosco para suporte ou dúvidas:\n\n` +
+    `📧 *E-mail*: orion.technologies635@gmail.com\n` +
+    `📱 *Telegram Oficial*: https://t.me/orionvpnoficial\n` +
+    `🌐 *Site*: https://inocenciojose.netlify.app\n` +
+    `📱 *WhatsApp*: +244 972 264 209\n\n` +
+    `🔗 *LinkedIn*: https://www.linkedin.com/in/inocêncio-josé-233778346/\n` +
+    `📘 *Facebook Orion*: https://www.facebook.com/profile.php?id=61575436262847\n` +
+    `🐙 *GitHub*: https://github.com/Inocencio-jose\n\n` +
+    `🕒 *Horário de Atendimento*: Segunda a Sexta, das 9h às 18h (WAT)\n\n` +
+    `Para suporte imediato, use o comando /suporte <descrição do problema>.`,
+    { parse_mode: "Markdown" }
+  );
 });
 
 bot.onText(/\/ajuda/, (msg) => {
