@@ -1,5 +1,3 @@
-Perfeito! Aqui vai uma versão mais **profissional e visualmente atraente** do README do **CASSIEF**, com **badges, links e destaque para o autor**, pronta para colocar no GitHub:
-
 # CASSIEF 🤖
 
 ![Status](https://img.shields.io/badge/status-ativo-brightgreen)
