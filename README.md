@@ -100,6 +100,7 @@ node bot.js
 | `/postar <mensagem>`     | Postagem administrativa (admins)           |
 | `/advertir <userId>`     | Dar advertência (admins)                   |
 | `/suporte <descrição>`   | Abrir ticket de suporte                    |
+| `/contatos`              | Links de contato                    |
 | `/fecharticket <userId>` | Fechar ticket (admins)                     |
 | `/enquete <pergunta>`    | Criar enquete (admins)                     |
 | `/pontos`                | Verificar pontos acumulados                |
