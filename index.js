@@ -2,6 +2,8 @@ require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const cron = require('node-cron');
 const fs = require('fs');
+const express = require('express');
+const app = express();
 const token = process.env.BOT_TOKEN;
 
 const bot = new TelegramBot(token, { polling: true });
@@ -470,4 +472,12 @@ bot.on('message', (msg) => {
       return;
     }
   }
+});
+
+const PORT = process.env.PORT || 10000; // qualquer porta
+
+app.get('/', (req, res) => res.send('Bot CASSIEF rodando!'));
+
+app.listen(PORT, () => {
+  console.log(`Servidor “fake” rodando na porta ${PORT}`);
 });
