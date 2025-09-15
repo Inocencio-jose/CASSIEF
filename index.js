@@ -77,7 +77,8 @@ bot.onText(/\/start/, (msg) => {
 
   bot.sendMessage(chatId, `👋 Olá, ${nome}!\n\n` +
     `Sou a CASSIEF, a assistente oficial da VPN AJ Freenet.\nEstou aqui para ajudar com informações, suporte e manter nosso grupo seguro.` +
-    `/ajuda para mais informações`
+    `/ajuda para mais informações` +
+    `Acesse o Grupo em t.me/orionvpnchat`
   );
 });
 
