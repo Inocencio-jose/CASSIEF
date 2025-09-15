@@ -75,7 +75,10 @@ bot.onText(/\/start/, (msg) => {
   const nome = msg.from.first_name || 'usuário';
   const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId, `👋 Olá, ${nome}!\n\nSou o CASSIEF, o assistente oficial da VPN AJ Freenet.\nEstou aqui para ajudar com informações, suporte e manter nosso grupo seguro.`);
+  bot.sendMessage(chatId, `👋 Olá, ${nome}!\n\n` +
+    `Sou a CASSIEF, a assistente oficial da VPN AJ Freenet.\nEstou aqui para ajudar com informações, suporte e manter nosso grupo seguro.` +
+    `/ajuda para mais informações`
+  );
 });
 
 bot.onText(/\/contatos/, (msg) => {
