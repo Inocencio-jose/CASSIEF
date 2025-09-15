@@ -59,12 +59,12 @@ Desenvolvido para a comunidade **VPN AJ Freenet**, mas adaptável a outros grupo
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/Inocencio-jose/cassief-bot.git
+   git clone https://github.com/Inocencio-jose/cassief.git
    ```
 
 2. Acesse a pasta do projeto:
    ```bash
-   cd cassief-bot
+   cd cassief
    ```
 
 3. Instale as dependências:
@@ -111,7 +111,7 @@ Desenvolvido para a comunidade **VPN AJ Freenet**, mas adaptável a outros grupo
 ## 🗂 Estrutura do Projeto
 
 ```
-cassief-bot/
+cassief/
 ├── .env                  # Variáveis de ambiente (ex: BOT_TOKEN)
 ├── .gitignore            # Arquivos a ignorar no Git
 ├── package.json          # Dependências e scripts
