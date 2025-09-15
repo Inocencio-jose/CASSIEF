@@ -464,7 +464,7 @@ bot.on('message', (msg) => {
     return;
   }
 
-  // Verifica palavras proibidas
+  // Verifica palavras proibidassssss
   for (let palavra of palavrasProibidas) {
     if (textoMensagem.includes(palavra)) {
       bot.deleteMessage(chatId, msg.message_id);
