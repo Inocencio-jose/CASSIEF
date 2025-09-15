@@ -12,7 +12,7 @@ Criado e mantido por **Inocêncio José**.
 ## 🌐 Descrição
 CASSIEF é um **bot completo para Telegram**, focado em **moderação, suporte e engajamento de membros**.  
 Ele automatiza tarefas administrativas, mantém o grupo seguro e oferece interação avançada com os usuários.  
-O bot foi desenvolvido para a comunidade **VPN AJ Freenet**, mas é adaptável a outros grupos.
+Desenvolvido para a comunidade **VPN AJ Freenet**, mas adaptável a outros grupos.
 
 ---
 
@@ -24,7 +24,7 @@ O bot foi desenvolvido para a comunidade **VPN AJ Freenet**, mas é adaptável a
 - Advertências e banimentos automáticos.
 - Suspensão temporária de usuários infratores.
 
-### Interação com usuários
+### Interação com Usuários
 - Boas-vindas automáticas a novos membros.
 - Sistema de pontos e indicações (`/pontos`, `/indicar`).
 - Criação de enquetes e envio de feedback.
@@ -47,6 +47,8 @@ O bot foi desenvolvido para a comunidade **VPN AJ Freenet**, mas é adaptável a
 ## 🛠 Tecnologias
 - **Node.js** – Ambiente de execução.
 - **node-telegram-bot-api** – Integração com Telegram.
+- **express** – Servidor para webhooks.
+- **body-parser** – Processamento de requisições JSON.
 - **dotenv** – Variáveis de ambiente.
 - **node-cron** – Agendamento de tarefas.
 - **fs** – Persistência de dados local.
@@ -56,40 +58,37 @@ O bot foi desenvolvido para a comunidade **VPN AJ Freenet**, mas é adaptável a
 ## 🚀 Instalação
 
 1. Clone o repositório:
-```bash
-git clone https://github.com/Inocencio-jose/CASSIEF.git
-````
+   ```bash
+   git clone https://github.com/Inocencio-jose/cassief-bot.git
+   ```
 
 2. Acesse a pasta do projeto:
-
-```bash
-cd CASSIEF
-```
+   ```bash
+   cd cassief-bot
+   ```
 
 3. Instale as dependências:
-
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 4. Crie um arquivo `.env` com a variável:
+   ```env
+   BOT_TOKEN=SEU_TOKEN_DO_TELEGRAM
+   ```
 
-```env
-BOT_TOKEN=SEU_TOKEN_DO_TELEGRAM
-```
-
-5. Execute o bot:
-
-```bash
-node bot.js
-```
+5. Execute o bot localmente (para testes, use polling):
+   ```bash
+   npm start
+   ```
+   **Nota**: Para testes locais, mude temporariamente `polling: false` para `polling: true` em `src/index.js`. Para produção, use webhooks com Render.
 
 ---
 
 ## 📋 Comandos Principais
 
 | Comando                  | Descrição                                  |
-| ------------------------ | ------------------------------------------ |
+|--------------------------|--------------------------------------------|
 | `/start`                 | Apresentação do bot                        |
 | `/ajuda`                 | Lista de comandos disponíveis              |
 | `/regras`                | Exibe regras do grupo                      |
@@ -100,7 +99,7 @@ node bot.js
 | `/postar <mensagem>`     | Postagem administrativa (admins)           |
 | `/advertir <userId>`     | Dar advertência (admins)                   |
 | `/suporte <descrição>`   | Abrir ticket de suporte                    |
-| `/contatos`              | Links de contato                    |
+| `/contatos`              | Links de contato                           |
 | `/fecharticket <userId>` | Fechar ticket (admins)                     |
 | `/enquete <pergunta>`    | Criar enquete (admins)                     |
 | `/pontos`                | Verificar pontos acumulados                |
@@ -109,37 +108,77 @@ node bot.js
 
 ---
 
-## 🗂 Estrutura do projeto
+## 🗂 Estrutura do Projeto
 
 ```
-CASSIEF/
-├─ node_modules/           # Dependências Node.js
-├─ dados.json              # Dados persistentes (advertências, tickets, pontos)
-├─ .env                    # Token do bot
-├─ bot.js                  # Código principal do bot
-├─ package.json            # Configuração do projeto
-└─ package-lock.json       # Lock das dependências
+cassief-bot/
+├── .env                  # Variáveis de ambiente (ex: BOT_TOKEN)
+├── .gitignore            # Arquivos a ignorar no Git
+├── package.json          # Dependências e scripts
+├── package-lock.json     # Lock das dependências
+├── README.md             # Documentação do projeto
+├── src/                  # Código fonte principal
+│   ├── index.js          # Entrypoint principal
+│   ├── config/           # Configurações e constantes
+│   │   └── config.js     # Constantes (IDs, limites, palavras proibidas)
+│   ├── handlers/         # Handlers para comandos e eventos
+│   │   ├── commands.js   # Handlers para comandos
+│   │   ├── events.js     # Handlers para eventos (ex: new_chat_members)
+│   │   └── cron.js       # Tarefas agendadas com node-cron
+│   └── utils/            # Funções utilitárias
+│       └── persistence.js # Funções para salvar/carregar dados
+├── data/                 # Dados persistentes
+│   └── dados.json        # JSON para advertências, pontos, tickets
+└── assets/               # Arquivos estáticos
+    └── generated-icon.png # Ícone do projeto
 ```
+
+---
+
+## 🌍 Deploy no Render
+
+1. Crie um **Web Service** no Render e vincule ao repositório GitHub.
+2. Configure a variável de ambiente no Render:
+   ```env
+   BOT_TOKEN=SEU_TOKEN_DO_TELEGRAM
+   ```
+3. Defina os comandos de build e start:
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+4. Verifique o webhook:
+   ```bash
+   curl https://api.telegram.org/bot<SEU_TOKEN>/getWebhookInfo
+   ```
+   O webhook deve apontar para `https://cassief.onrender.com/webhook`.
+5. Para evitar que o servidor "durma" no plano gratuito:
+   - Configure um monitor no UptimeRobot para pingar `https://cassief.onrender.com/` a cada 5 minutos.
 
 ---
 
 ## 🤝 Contribuição
 
-Pull requests são bem-vindos!
+1. Fork o repositório.
+2. Crie uma branch para sua feature: `git checkout -b minha-feature`.
+3. Faça commit das mudanças: `git commit -m 'Adiciona minha feature'`.
+4. Envie para o repositório: `git push origin minha-feature`.
+5. Abra um Pull Request.
+
 Para grandes mudanças, abra uma issue antes para discussão.
 
 ---
 
 ## 📜 Licença
 
-Projeto criado por **Inocêncio José** – Todos os direitos reservados.
+Projeto criado por **Inocêncio José** – Licença MIT.
 
 ---
 
-## 🔗 Links úteis
+## 🔗 Links Úteis
 
-* [Telegram](https://telegram.org/)
-* [Node.js](https://nodejs.org/)
-* [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
+- [Telegram](https://telegram.org/)
+- [Node.js](https://nodejs.org/)
+- [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
+- [Render](https://render.com/)
+---
 
-```
+
