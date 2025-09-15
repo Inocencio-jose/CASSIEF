@@ -1,21 +1,38 @@
 {
-  "name": "nodejs",
+  "name": "cassief-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Bot Telegram CASSIEF para gerenciamento de grupo VPN AJ Freenet, com suporte a comandos, tickets, filtros e persistência de dados.",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "telegram-bot",
+    "vpn-support",
+    "moderation",
+    "node.js",
+    "express",
+    "cron"
+  ],
+  "author": "Inocêncio José (Orion Technologies)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Inocencio-jose/cassief-bot.git"
+  },
   "dependencies": {
-    "@types/node": "^22.13.11",
-    "body-parser": "^2.2.0",
+    "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0",
+    "express": "^4.21.1",
     "node-cron": "^3.0.3",
     "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

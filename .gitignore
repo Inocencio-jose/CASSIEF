@@ -131,3 +131,14 @@ dist
 
 # Replit debugger
 .breakpoints
+# evitar commits de dados sensíveis
+data/dados.json
+
+# ignorar arquivos de backup
+*.bak
+*.tmp
+*.swp
+*.swo
+# ignorar diretórios de build
+dist/
+build/
