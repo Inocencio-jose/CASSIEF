@@ -3,11 +3,32 @@ const TelegramBot = require('node-telegram-bot-api');
 const cron = require('node-cron');
 const fs = require('fs');
 const express = require('express');
+const bodyParser = require('body-parser'); // Adicionado para processar JSON
 const app = express();
 const token = process.env.BOT_TOKEN;
 
-const bot = new TelegramBot(token, { polling: true });
+// Inicialize o bot SEM polling
+const bot = new TelegramBot(token, { polling: false });
 console.log('Servidor do bot está rodando!');
+
+// Configura middleware para processar JSON
+app.use(bodyParser.json());
+
+// Endpoint para receber atualizações do Telegram via webhook
+app.post('/webhook', (req, res) => {
+  bot.processUpdate(req.body); // Processa a atualização recebida
+  res.sendStatus(200); // Responde OK para o Telegram
+});
+
+// Configura o webhook na inicialização
+const webhookUrl = 'https://cassief.onrender.com/webhook';
+bot.setWebHook(webhookUrl)
+  .then(() => {
+    console.log(`Webhook configurado com sucesso em: ${webhookUrl}`);
+  })
+  .catch((err) => {
+    console.error('Erro ao configurar webhook:', err);
+  });
 
 // ID do chat do grupo
 const grupoDestino = -1002561684897;
@@ -468,7 +489,7 @@ bot.on('message', (msg) => {
     return;
   }
 
-  // Verifica palavras proibidassssss
+  // Verifica palavras proibidas
   for (let palavra of palavrasProibidas) {
     if (textoMensagem.includes(palavra)) {
       bot.deleteMessage(chatId, msg.message_id);
@@ -478,10 +499,10 @@ bot.on('message', (msg) => {
   }
 });
 
-const PORT = process.env.PORT || 10000; // qualquer porta
+const PORT = process.env.PORT || 10000;
 
 app.get('/', (req, res) => res.send('Bot CASSIEF rodando!'));
 
 app.listen(PORT, () => {
-  console.log(`Servidor “fake” rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
